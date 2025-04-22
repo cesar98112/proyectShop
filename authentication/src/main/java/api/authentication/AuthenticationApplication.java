@@ -1,6 +1,6 @@
 package api.authentication;
 
-import api.authentication.config.security.repository.UserRepository;
+import api.authentication.repository.UserRepository;
 import api.authentication.config.security.user.Roles;
 import api.authentication.config.security.user.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +25,10 @@ public class AuthenticationApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
+		if( !userRepository.findAll().isEmpty()){
+			userRepository.deleteAll();
+		};
 
 		UserModel user = new UserModel("cesar",new BCryptPasswordEncoder().encode("1234"), Set.of(Roles.USER));
 

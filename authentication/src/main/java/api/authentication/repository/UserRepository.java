@@ -1,4 +1,4 @@
-package api.authentication.config.security.repository;
+package api.authentication.repository;
 
 import api.authentication.config.security.user.UserModel;
 import org.springframework.data.mongodb.repository.MongoRepository;

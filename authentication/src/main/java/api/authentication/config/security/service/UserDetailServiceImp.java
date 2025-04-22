@@ -1,6 +1,6 @@
 package api.authentication.config.security.service;
 
-import api.authentication.config.security.repository.UserRepository;
+import api.authentication.repository.UserRepository;
 import api.authentication.config.security.user.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -17,6 +17,7 @@ public class UserDetailServiceImp implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
 
         UserModel user = userRepository.findUserModelByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException("usuario no encontrado")
