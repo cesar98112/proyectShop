@@ -22,6 +22,7 @@ public class AuthenticationController {
 
     }
 
+
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestBody UserRequest userRequest){
         String token = authenticationService.loginUser(userRequest);
