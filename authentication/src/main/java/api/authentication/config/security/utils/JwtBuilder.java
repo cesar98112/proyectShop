@@ -1,5 +1,6 @@
 package api.authentication.config.security.utils;
 
+import api.authentication.exeption.CustomExceptions;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -9,6 +10,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
@@ -61,7 +63,7 @@ public class JwtBuilder {
 
             return decodedJWT;
         }catch (JWTVerificationException exception){
-            throw new JWTVerificationException("Invalid token");
+            throw new CustomExceptions(HttpStatus.BAD_REQUEST,"SD");
         }
     }
 

@@ -106,6 +106,14 @@ public class UserModel {
         this.accountNoLocked = accountNoLocked;
     }
 
+    public Set<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Roles> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "UserModel{" +

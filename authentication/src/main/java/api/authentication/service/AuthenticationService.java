@@ -1,19 +1,19 @@
 package api.authentication.service;
 
 import api.authentication.config.security.service.UserDetailServiceImp;
-import api.authentication.config.security.user.Roles;
-import api.authentication.config.security.user.UserModel;
-import api.authentication.config.security.user.UserRequest;
-import api.authentication.config.security.user.UserResponse;
+import api.authentication.config.security.user.*;
 import api.authentication.config.security.utils.JwtBuilder;
 import api.authentication.config.security.utils.JwtFilter;
 import api.authentication.repository.UserRepository;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
@@ -63,6 +64,19 @@ public class AuthenticationService {
 
 
     }
+
+    public UserDto validateToken(String token){
+
+
+        DecodedJWT decodedJWT = jwtBuilder.validateToken(token);
+
+        String username = jwtBuilder.extractUsername(decodedJWT);
+        String stringAuthorities = jwtBuilder.expesificClaim(decodedJWT,"authorities").asString();
+        Collection<? extends GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(stringAuthorities);
+
+        return new UserDto(username,null,stringAuthorities);
+    }
+
 
     public String loginUser(UserRequest userRequest){
 
