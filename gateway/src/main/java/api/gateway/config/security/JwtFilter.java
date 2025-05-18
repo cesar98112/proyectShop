@@ -40,6 +40,7 @@ public class JwtFilter implements WebFilter {
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
 
         String token = extractToken(exchange.getRequest());
+        log.info(token);
         String path = exchange.getRequest().getPath().value();
 
 
@@ -107,6 +108,7 @@ public class JwtFilter implements WebFilter {
     }
     private String extractToken(ServerHttpRequest request) {
         String header = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+        log.info(header);
         if (header != null && header.startsWith("Bearer ")) {
             return header.substring(7);
         }

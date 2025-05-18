@@ -1,0 +1,21 @@
+<div class="loginContainer">
+    <h2>Login</h2>
+    <div class="loginForm">
+        <form action="">
+            <div class="inputText">
+                <label for="username">Username</label>
+                <input type="text" [(ngModel)]="username" name="username" placeholder="username" id="password">
+            </div>
+            <div class="inputText">
+                <label for="password">Password</label>
+                <input type="password" [(ngModel)]="password" name="password" placeholder="password" id="password">
+            </div>
+            <div class="buttonLogin">
+                <button (click)="login()">Log-In</button>
+            </div>
+            <p>¿Aun no tienes cuenta?<a href="/register">Registrate</a></p>
+            
+        </form>
+    </div>
+    
+</div>

@@ -55,6 +55,7 @@ public class JwtBuilder {
 
     public DecodedJWT validateToken (String token){
         try{
+            logger.info(token);
             Algorithm algorithm = Algorithm.HMAC256(this.privateKey);
 
             JWTVerifier verifier = JWT.require(algorithm).withIssuer(this.userGenerator)
